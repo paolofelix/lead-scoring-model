@@ -4,6 +4,8 @@ Predicts which inbound B2B SaaS leads will become closed-won deals within 90 day
 
 The data is simulated, so the **true** win probability of every lead is known. That lets the model be checked against ground truth, not just against noisy outcomes.
 
+📄 **[Read the findings write-up →](FINDINGS.md)**
+
 > **Part 4 of a marketing analytics series**
 >
 > 1. [Multi-channel attribution & ROAS](https://github.com/paolofelix/multichannel-attribution-roas): which channel gets credit?
@@ -32,8 +34,6 @@ The data is simulated, so the **true** win probability of every lead is known. T
 - **Lead quality varies about 10x by source:** referral leads are worth ~$3.0k each in expected first-year revenue, Meta leads ~$0.3k. A cost-per-lead report would hide this.
 
 ![Prioritisation strategies](outputs/figures/11_prioritisation_strategies.png)
-
-📄 **[Read the findings write-up →](FINDINGS.md)**
 
 ---
 
