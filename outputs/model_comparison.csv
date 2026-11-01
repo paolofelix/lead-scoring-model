@@ -1,0 +1,4 @@
+,ROC AUC,PR AUC,Brier,Log loss,PR AUC lift vs random
+Logistic regression,0.8358,0.2605,0.041,0.1556,5.3129
+XGBoost,0.8396,0.2762,0.0408,0.1546,5.6335
+Oracle (true prob.),0.8511,0.2982,0.04,0.1505,6.0816
