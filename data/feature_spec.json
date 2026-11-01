@@ -1,0 +1,31 @@
+{
+  "features": {
+    "categorical": [
+      "channel",
+      "campaign_type",
+      "form_type",
+      "email_type",
+      "company_size",
+      "industry",
+      "job_level",
+      "region"
+    ],
+    "numeric": [
+      "pages_viewed",
+      "visited_pricing",
+      "time_on_site_sec"
+    ],
+    "time": [
+      "created_at"
+    ]
+  },
+  "excluded": {
+    "first_response_hours": "post-creation (sales behaviour), not known at scoring time",
+    "is_sql": "outcome-side funnel stage",
+    "close_date": "outcome",
+    "acv_usd": "outcome (only exists for wins)",
+    "outcome_matured": "bookkeeping flag",
+    "lead_id": "identifier"
+  },
+  "target": "closed_won"
+}
