@@ -33,6 +33,8 @@ The data is simulated, so the **true** win probability of every lead is known. T
 
 ![Prioritisation strategies](outputs/figures/11_prioritisation_strategies.png)
 
+📄 **[Read the findings write-up →](FINDINGS.md)**
+
 ---
 
 ## The problem
