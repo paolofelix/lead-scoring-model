@@ -1,10 +1,14 @@
 # Lead Scoring Model: Predicting Which B2B Leads Close
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://paolofelix-lead-scoring-model.streamlit.app/)
+
+**▶ [Try the interactive dashboard](https://paolofelix-lead-scoring-model.streamlit.app/)**: set your sales capacity and compare how many wins and how much revenue each way of ranking leads captures, browse the scored lead queue, or score a lead yourself.
+
 Predicts which inbound B2B SaaS leads will become closed-won deals within 90 days, using only information available the moment the form is submitted. Leads are then ranked by win probability and expected deal value, so sales works the right 20% first.
 
 The data is simulated, so the **true** win probability of every lead is known. That lets the model be checked against ground truth, not just against noisy outcomes.
 
-📄 **[Read the findings write-up →](FINDINGS.md)**
+📄 **[Read the findings write-up →](FINDINGS.md)** · 📊 **[Open the live dashboard →](https://paolofelix-lead-scoring-model.streamlit.app/)**
 
 > **Part 4 of a marketing analytics series**
 >
@@ -13,7 +17,7 @@ The data is simulated, so the **true** win probability of every lead is known. T
 > 3. [Marketing Mix Model](https://github.com/paolofelix/marketing-mix-model): what would have happened *without* each channel?
 > 4. **Lead Scoring Model**: which leads will actually close, and which should sales call first?
 
-**Stack:** Python, pandas, scikit-learn, XGBoost, SHAP, Matplotlib, Google Colab
+**Stack:** Python, pandas, scikit-learn, XGBoost, SHAP, Matplotlib, Plotly, Streamlit, Google Colab
 
 ---
 
@@ -98,6 +102,28 @@ On the 3,929 new leads, checked against the ground truth, tier A's true win rate
 
 > `L103204` · referral · contact_sales · 201–1000 employees · score 0.56 · Tier A · reasons: company_size=201-1000; channel=referral; visited_pricing=1
 
+## Interactive dashboard
+
+**Live app:** https://paolofelix-lead-scoring-model.streamlit.app/
+
+`dashboard/app.py` is a Streamlit app built on the scored new leads (`outputs/scored_new_leads.csv`) and the simulation's ground truth, so every result is checked against how each lead really turned out:
+
+| Tab | What you can do |
+|---|---|
+| **Prioritisation** | Set how many leads sales can work first (5–60%) and compare the share of wins and revenue captured by the model, expected-value ranking, the current routing rule and arrival order, with cumulative gains curves |
+| **Lead quality by source** | Compare expected revenue per lead, share of A-tier leads and actual win rate by channel and campaign type, and work out the most each source can pay per lead for a target return |
+| **What drives a win** | See win rates by any segment with 95% Wilson intervals, how a pricing-page visit matters more at larger companies, and the speed-to-lead effect |
+| **Lead queue** | Filter scored new leads by tier, channel and form type, rank them by score or expected value, read the plain-language reasons, and download the list as CSV |
+| **Score a lead** | Enter a lead's details to get its win probability, tier, expected value, a suggested action, and a chart of what pushed the score up or down |
+| **Model performance** | Compare test-set metrics with the oracle, check predicted vs actual win rate by tier, and view the calibration, gains and SHAP charts |
+
+**Note:** the "Score a lead" tab uses a logistic regression that the app retrains when it starts (held-out ROC AUC ≈ 0.84, in line with the logistic baseline above). The saved `.joblib` pipelines only load with the exact library versions used in Colab. Scores and tiers everywhere else come from the XGBoost model in the notebooks.
+
+To run it locally (from the repo root):
+
+    pip install -r dashboard/requirements.txt
+    streamlit run dashboard/app.py
+
 ## Limitations
 
 - **Simulated data.** Real CRM data is messier, with duplicate leads, changing field definitions and inconsistent stage updates.
@@ -120,6 +146,8 @@ notebooks/             01_simulate_data → 04_scoring_and_impact
 src/simulate_data.py   data-generating process
 models/                trained logistic regression + XGBoost pipelines
 outputs/               model_comparison.csv, scored_new_leads.csv, figures/
+dashboard/             Streamlit app (app.py) and its requirements.txt
+.streamlit/            dashboard theme (config.toml)
 ```
 
 ## License
